@@ -1,0 +1,10 @@
+log/
+target/
+test/
+.idea/
+*.iws
+*.iml
+*.ipr
+*.jpeg
+*.log
+

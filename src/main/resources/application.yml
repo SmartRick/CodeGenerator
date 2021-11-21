@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://8.142.34.31:3308/fun_culture?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    username: root
+    password: funadmin123
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+
+codegenerator:
+  template-path: codegenerator
+  table-prefix: t_
+  author: SmartRick
+  base-package: rick.pro
+  project-path: D:\Temp
