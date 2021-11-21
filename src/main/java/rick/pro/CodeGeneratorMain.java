@@ -20,6 +20,28 @@ import java.util.List;
 @SpringBootApplication
 @MapperScan(basePackageClasses = TableDao.class)
 public class CodeGeneratorMain {
+    @Autowired
+    private static TableDao tableDao;
+    @Autowired
+    private static CodeGeneratorService codeGenerator;
+
+    private String author;
+    private String tablePrefix;
+    private String basePackage;
+
     public static void main(String[] args) {
+        String tablePrefix = "t_";
+        List<String> strings = tableDao.selectDatabaseTables();
+        strings.stream().forEach(System.out::println);
+
+        List<CodeGeneratorQueryColumnDTO> colnumDtos = Lists.newArrayList();
+
+
+        CodeGeneratorDTO codeGenerator = CodeGeneratorDTO.builder()
+                .author("SmartRick")
+                .basePackage("rick.pro")
+                .tableName("")
+                .tablePrefix(tablePrefix)
+                .queryColumnList(colnumDtos).build();
     }
 }
