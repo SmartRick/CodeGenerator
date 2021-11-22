@@ -6,7 +6,7 @@
     <resultMap id="${moduleClass}ExcelVO" type="${basePackage}.module.${modulePackage}.domain.vo.${moduleClass}ExcelVO"></resultMap>
 
 
-    <select id="queryByPage" resultMap="${moduleClass}VO">
+    <select id="selectByPage" resultMap="${moduleClass}VO">
         select
 #foreach($column in $columnList)
 #if($velocityCount != $columnList.size())
@@ -60,7 +60,7 @@
         </where>
     </select>
 
-    <select id="queryAllExportData" resultMap="${moduleClass}ExcelVO">
+    <select id="selectAllExportData" resultMap="${moduleClass}ExcelVO">
         select
 #foreach($column in $columnList)
 #if($velocityCount != $columnList.size())
@@ -114,7 +114,7 @@
         </where>
     </select>
 
-    <select id="queryBatchExportData" resultMap="${moduleClass}ExcelVO">
+    <select id="selectBatchExportData" resultMap="${moduleClass}ExcelVO">
         select
 #foreach($column in $columnList)
 #if($velocityCount != $columnList.size())
@@ -129,16 +129,5 @@
             #{item}
         </foreach>
     </select>
-
-    <delete id="deleteById">
-        delete from ${tableName} where id = #{id}
-    </delete>
-
-    <delete id="deleteByIdList">
-        delete from ${tableName} where id in
-        <foreach collection="idList" open="(" close=")" separator="," item="item">
-            #{item}
-        </foreach>
-    </delete>
 
 </mapper>

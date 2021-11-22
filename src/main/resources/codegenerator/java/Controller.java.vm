@@ -27,44 +27,55 @@ import java.util.List;
  *
  * @author ${author}
  * @version 1.0
- * @company ${company}
- * @copyright (c)  ${company}Inc. All rights reserved.
  * @date ${date}
  * @since JDK1.8
  */
 @RestController
-@Api(tags = {"${tableDesc}"})
+@RequestMapping(value = "/${moduleVar}")
+@Api(value = "${tableDesc}",tags = {"${tableDesc}"})
 public class ${moduleClass}Controller extends BaseController {
 
     @Autowired
     private ${moduleClass}Service ${moduleVar}Service;
 
+    @ApiOperation(value = "根据Id查询${tableDesc}",notes = "@author ${author}")
+    @GetMapping("/{id}")
+    public ResponseDTO<PageResultDTO<${moduleClass}VO>> queryById(@PathVariable Long id) {
+        return ${moduleVar}Service.queryById(id);
+    }
+
     @ApiOperation(value = "分页查询${tableDesc}",notes = "@author ${author}")
-    @PostMapping("/${moduleVar}/page/query")
+    @PostMapping("/page")
     public ResponseDTO<PageResultDTO<${moduleClass}VO>> queryByPage(@RequestBody ${moduleClass}QueryDTO queryDTO) {
         return ${moduleVar}Service.queryByPage(queryDTO);
     }
 
     @ApiOperation(value = "添加${tableDesc}",notes = "@author ${author}")
-    @PostMapping("/${moduleVar}/add")
+    @PostMapping("/")
     public ResponseDTO<String> add(@RequestBody @Validated ${moduleClass}AddDTO addTO){
         return ${moduleVar}Service.add(addTO);
     }
 
     @ApiOperation(value="修改${tableDesc}",notes = "@author ${author}")
-    @PostMapping("/${moduleVar}/update")
+    @PutMapping("/")
     public ResponseDTO<String> update(@RequestBody @Validated ${moduleClass}UpdateDTO updateDTO){
         return ${moduleVar}Service.update(updateDTO);
     }
 
+    @ApiOperation(value="删除${tableDesc}",notes = "@author ${author}")
+    @DeleteMapping("/{id}")
+    public ResponseDTO<String> remove(@PathVariable @Validated Long id) {
+        return ${moduleVar}Service.remove(id);
+    }
+
     @ApiOperation(value="批量删除${tableDesc}",notes = "@author ${author}")
-    @PostMapping("/${moduleVar}/deleteByIds")
-    public ResponseDTO<String> delete(@RequestBody @Validated ValidateList<Long> idList) {
-        return ${moduleVar}Service.deleteByIds(idList);
+    @DeleteMapping("/removes")
+    public ResponseDTO<String> removeByIds(@RequestBody @Validated ValidateList<Long> ids) {
+        return ${moduleVar}Service.removeByIds(ids);
     }
 
     @ApiOperation(value = "批量导出", notes = "@author ${author}")
-    @PostMapping("/${moduleVar}/export/batch")
+    @PostMapping("/export/batch")
     public void batchExport(@RequestBody @Validated ValidateList<Long> idList, HttpServletResponse response) {
         //查询数据
         List<${moduleClass}ExcelVO> ${moduleVar}List = ${moduleVar}Service.queryBatchExportData(idList);
@@ -75,7 +86,7 @@ public class ${moduleClass}Controller extends BaseController {
     }
 
     @ApiOperation(value = "导出全部", notes = "@author ${author}")
-    @PostMapping("/${moduleVar}/export/all")
+    @PostMapping("/export/all")
     public void exportAll(@RequestBody @Validated ${moduleClass}QueryDTO queryDTO, HttpServletResponse response) {
         //查询数据
         List<${moduleClass}ExcelVO> ${moduleVar}List = ${moduleVar}Service.queryAllExportData(queryDTO);

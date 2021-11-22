@@ -3,7 +3,7 @@ package ${basePackage}.module.${modulePackage}.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import ${basePackage}.module.${modulePackage}.domain.dto.${moduleClass}QueryDTO;
+import ${basePackage}.module.${modulePackage}.domain.dto.${moduleClass}SelectDTO;
 import ${basePackage}.module.${modulePackage}.domain.entity.${moduleClass}Entity;
 import ${basePackage}.module.${modulePackage}.domain.vo.${moduleClass}VO;
 import ${basePackage}.module.${modulePackage}.domain.vo.${moduleClass}ExcelVO;
@@ -29,36 +29,22 @@ public interface ${moduleClass}Dao extends BaseMapper<${moduleClass}Entity> {
 
     /**
      * 分页查询
-     * @param queryDTO
+     * @param selectDTO
      * @return ${moduleClass}VO
     */
-    IPage<${moduleClass}VO> queryByPage(Page page, @Param("queryDTO") ${moduleClass}QueryDTO queryDTO);
-
-    /**
-     * 根据id删除
-     * @param id
-     * @return
-    */
-    void deleteById(@Param("id")Long id);
-
-    /**
-     * 根据id批量删除
-     * @param idList
-     * @return
-    */
-    void deleteByIdList(@Param("idList") List<Long> idList);
+    IPage<${moduleClass}VO> selectByPage(Page page, @Param("queryDTO") ${moduleClass}QueryDTO queryDTO);
 
         /**
      * 查询所有导出数据
-     * @param queryDTO
+     * @param selectDTO
      * @return
      */
-    List<${moduleClass}ExcelVO> queryAllExportData(@Param("queryDTO")${moduleClass}QueryDTO queryDTO);
+    List<${moduleClass}ExcelVO> selectAllExportData(@Param("queryDTO")${moduleClass}QueryDTO queryDTO);
 
         /**
          * 查询批量导出数据
          * @param idList
          * @return
          */
-    List<${moduleClass}ExcelVO> queryBatchExportData(@Param("idList")List<Long> idList);
+    List<${moduleClass}ExcelVO> selectBatchExportData(@Param("idList")List<Long> idList);
 }

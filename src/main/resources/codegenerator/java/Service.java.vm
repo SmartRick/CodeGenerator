@@ -29,80 +29,61 @@ import java.util.List;
  * @date ${date}
  * @since JDK1.8
  */
+@Slf4j
 @Service
-public class ${moduleClass}Service {
-
-    @Autowired
-    private ${moduleClass}Dao ${moduleVar}Dao;
+public interface ${moduleClass}Service {
 
     /**
      * 根据id查询
      */
-    public ${moduleClass}Entity getById(Long id){
-        return  ${moduleVar}Dao.selectById(id);
-    }
+    public ${moduleClass}Entity queryById(Long id);
 
     /**
      * 分页查询
      * @author ${author}
      * @date ${date}
      */
-    public ResponseDTO<PageResultDTO<${moduleClass}VO>> queryByPage(${moduleClass}QueryDTO queryDTO) {
-        Page page = SmartPageUtil.convert2QueryPage(queryDTO);
-        IPage<${moduleClass}VO> voList = ${moduleVar}Dao.queryByPage(page, queryDTO);
-        PageResultDTO<${moduleClass}VO> pageResultDTO = SmartPageUtil.convert2PageResult(voList);
-        return ResponseDTO.succData(pageResultDTO);
-    }
+    public ResponseDTO<PageResultDTO<${moduleClass}VO>> queryByPage(${moduleClass}QueryDTO queryDTO);
 
     /**
      * 添加
      * @author ${author}
      * @date ${date}
      */
-    public ResponseDTO<String> add(${moduleClass}AddDTO addDTO) {
-        ${moduleClass}Entity entity = SmartBeanUtil.copy(addDTO, ${moduleClass}Entity.class);
-        ${moduleVar}Dao.insert(entity);
-        return ResponseDTO.succ();
-    }
+    public ResponseDTO<String> add(${moduleClass}AddDTO addDTO);
 
     /**
      * 编辑
      * @author ${author}
      * @date ${date}
      */
-    @Transactional(rollbackFor = Exception.class)
-    public ResponseDTO<String> update(${moduleClass}UpdateDTO updateDTO) {
-        ${moduleClass}Entity entity = SmartBeanUtil.copy(updateDTO, ${moduleClass}Entity.class);
-        ${moduleVar}Dao.updateById(entity);
-        return ResponseDTO.succ();
-    }
+    public ResponseDTO<String> update(${moduleClass}UpdateDTO updateDTO);
 
     /**
      * 删除
      * @author ${author}
      * @date ${date}
+    */
+    public ResponseDTO<String> remove(Long id);
+
+    /**
+     * 批量删除
+     * @author ${author}
+     * @date ${date}
      */
-    @Transactional(rollbackFor = Exception.class)
-    public ResponseDTO<String> deleteByIds(List<Long> idList) {
-        ${moduleVar}Dao.deleteByIdList(idList);
-        return ResponseDTO.succ();
-    }
+    public ResponseDTO<String> removeByIds(List<Long> idList);
 
     /**
      * 查询全部导出对象
      * @author ${author}
      * @date ${date}
      */
-    public List<${moduleClass}ExcelVO> queryAllExportData(${moduleClass}QueryDTO queryDTO) {
-        return ${moduleVar}Dao.queryAllExportData( queryDTO);
-    }
+    public List<${moduleClass}ExcelVO> queryAllExportData(${moduleClass}QueryDTO queryDTO);
 
     /**
      * 批量查询导出对象
      * @author ${author}
      * @date ${date}
      */
-    public List<${moduleClass}ExcelVO> queryBatchExportData(List<Long> idList) {
-        return ${moduleVar}Dao.queryBatchExportData(idList);
-    }
+    public List<${moduleClass}ExcelVO> queryBatchExportData(List<Long> idList);
 }

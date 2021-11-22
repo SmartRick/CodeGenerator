@@ -11,5 +11,6 @@ codegenerator:
   template-path: codegenerator
   table-prefix: t_
   author: SmartRick
-  base-package: rick.pro
+  project-name: fun-culture
+  base-package: com.ram.funculture
   project-path: D:\Temp

@@ -12,6 +12,7 @@ import org.apache.velocity.app.Velocity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import rick.pro.codegenerator.config.CodeGeneratorProperties;
 import rick.pro.codegenerator.dao.TableDao;
 import rick.pro.codegenerator.domain.CodeGeneratorDTO;
 import rick.pro.codegenerator.domain.CodeGeneratorQueryColumnDTO;
@@ -20,6 +21,7 @@ import rick.pro.codegenerator.domain.QueryFieldVO;
 import rick.pro.util.SmartDateUtil;
 import rick.pro.util.SmartStringUtil;
 
+import javax.annotation.Resource;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.FileWriter;
@@ -48,8 +50,8 @@ public class CodeGeneratorService {
     @Autowired
     private CodeGeneratorComponent codeGeneratorComponent;
 
-    @Value("${codegenerator.project-path}" )
-    private String projectBashPath;
+    @Resource
+    private CodeGeneratorProperties properties;
 
     /**
      * 大家注意了开始生成代码了
@@ -153,7 +155,7 @@ public class CodeGeneratorService {
 
     private String getOutputDir() {
 //        File desktopDir = FileSystemView.getFileSystemView().getHomeDirectory();
-        return this.projectBashPath + File.separator + "fun-culture" + File.separator;
+        return this.properties.getProjectPath() + File.separator + this.properties.getProjectName() + File.separator;
     }
 
     /**
