@@ -1,6 +1,5 @@
 log/
 target/
-test/
 .idea/
 *.iws
 *.iml
