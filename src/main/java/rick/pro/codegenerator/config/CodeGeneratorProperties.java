@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "codegenerator")
 public class CodeGeneratorProperties {
     private String author;
+    private String company;
     private String tablePrefix;
     private String basePackage;
     private String templatePath;

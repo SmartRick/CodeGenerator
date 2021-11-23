@@ -1,4 +1,4 @@
-package ${basePackage}.module.${modulePackage}.domain.vo;
+package ${basePackage}.domain.vo.excel;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;

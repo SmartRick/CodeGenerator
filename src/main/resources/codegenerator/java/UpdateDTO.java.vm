@@ -1,4 +1,4 @@
-package ${basePackage}.module.${modulePackage}.domain.dto;
+package ${basePackage}.domain.dto.update;
 
 import lombok.Data;
 

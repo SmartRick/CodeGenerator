@@ -1,4 +1,4 @@
-package ${basePackage}.module.${modulePackage}.domain.entity;
+package ${basePackage}.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import ${basePackage}.common.domain.BaseEntity;
@@ -19,14 +19,22 @@ import lombok.Data;
  */
 @Data
 @TableName("${tableName}")
-public class ${moduleClass}Entity extends BaseEntity{
-#foreach ($column in $columnList)
+public class ${moduleClass}Entity extends BaseEntity implements Serializable{
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
+#foreach ($column in $columnList)
 #if($column.columnName != 'id' && $column.fieldName != 'updatedAt' && $column.fieldName != 'createdAt')
+
     /**
      * $column.columnDesc
      */
+    #if($column.columnName == 'deletedAt')
+    @TableLogic(value = "0",delval = "1")
+    #end
+    @ApiModelProperty("$column.columnDesc")
     private $column.fieldType $column.fieldName;
+
 #end
 #end
 

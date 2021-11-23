@@ -1,4 +1,4 @@
-package ${basePackage}.module.${modulePackage}.domain.vo;
+package ${basePackage}.domain.vo;
 
 import lombok.Data;
 #foreach ($dtoImport in $dtoImports)

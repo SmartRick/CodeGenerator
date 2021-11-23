@@ -24,7 +24,7 @@ import java.util.Map;
 @Component
 public class CodeGeneratorComponent {
     @Resource
-    private CodeGeneratorProperties  properties;
+    private CodeGeneratorProperties properties;
     private static Map<String, String> dataMap = new HashMap<>(16);
     private static Map<String, String> numberTypeMap = new HashMap<>(16);
 
@@ -74,12 +74,12 @@ public class CodeGeneratorComponent {
         templateMap.put(properties.getTemplatePath() + "/java/Controller.java.vm", javaPackagePath + "controller" + File.separator + moduleClass + "Controller.java");
         templateMap.put(properties.getTemplatePath() + "/java/Dao.java.vm", javaPackagePath + "dao" + File.separator + moduleClass + "Dao.java");
         templateMap.put(properties.getTemplatePath() + "/java/Dao.xml.vm", xmlPackagePath + moduleClass + "Mapper.xml");
-        templateMap.put(properties.getTemplatePath() + "/java/AddDTO.java.vm", javaPackagePath + "domain" + File.separator + "dto" + File.separator + moduleClass + "AddDTO.java");
-        templateMap.put(properties.getTemplatePath() + "/java/UpdateDTO.java.vm", javaPackagePath + "domain" + File.separator + "dto" + File.separator + moduleClass + "UpdateDTO.java");
+        templateMap.put(properties.getTemplatePath() + "/java/AddDTO.java.vm", javaPackagePath + "domain" + File.separator + "dto" + File.separator + "add" + File.separator + moduleClass + "AddDTO.java");
+        templateMap.put(properties.getTemplatePath() + "/java/UpdateDTO.java.vm", javaPackagePath + "domain" + File.separator + "dto" + File.separator + "update" + File.separator + moduleClass + "UpdateDTO.java");
         templateMap.put(properties.getTemplatePath() + "/java/Entity.java.vm", javaPackagePath + "domain" + File.separator + "entity" + File.separator + moduleClass + "Entity.java");
         templateMap.put(properties.getTemplatePath() + "/java/VO.java.vm", javaPackagePath + "domain" + File.separator + "vo" + File.separator + moduleClass + "VO.java");
-        templateMap.put(properties.getTemplatePath() + "/java/ExcelVO.java.vm", javaPackagePath + "domain" + File.separator + "vo" + File.separator + moduleClass + "ExcelVO.java");
-        templateMap.put(properties.getTemplatePath() + "/java/QueryDTO.java.vm", javaPackagePath + "domain" + File.separator + "dto" + File.separator + moduleClass + "QueryDTO.java");
+        templateMap.put(properties.getTemplatePath() + "/java/ExcelVO.java.vm", javaPackagePath + "domain" + File.separator + "vo" + File.separator + "excel" + File.separator + moduleClass + "ExcelVO.java");
+        templateMap.put(properties.getTemplatePath() + "/java/QueryDTO.java.vm", javaPackagePath + "domain" + File.separator + "dto" + File.separator + "query" + File.separator + moduleClass + "QueryDTO.java");
         templateMap.put(properties.getTemplatePath() + "/java/Service.java.vm", javaPackagePath + "service" + File.separator + moduleClass + "Service.java");
         templateMap.put(properties.getTemplatePath() + "/java/ServiceImpl.java.vm", javaPackagePath + "service" + File.separator + "impl" + File.separator + moduleClass + "ServiceImpl.java");
         //前端

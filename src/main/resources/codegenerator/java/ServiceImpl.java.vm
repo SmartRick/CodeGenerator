@@ -1,16 +1,16 @@
-package ${basePackage}.module.${modulePackage}.service;
+package ${basePackage}.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${basePackage}.common.domain.PageResultDTO;
 import ${basePackage}.common.domain.ResponseDTO;
-import ${basePackage}.module.${modulePackage}.dao.${moduleClass}Dao;
-import ${basePackage}.module.${modulePackage}.domain.dto.${moduleClass}AddDTO;
-import ${basePackage}.module.${modulePackage}.domain.dto.${moduleClass}UpdateDTO;
-import ${basePackage}.module.${modulePackage}.domain.dto.${moduleClass}QueryDTO;
-import ${basePackage}.module.${modulePackage}.domain.entity.${moduleClass}Entity;
-import ${basePackage}.module.${modulePackage}.domain.vo.${moduleClass}VO;
-import ${basePackage}.module.${modulePackage}.domain.vo.${moduleClass}ExcelVO;
+import ${basePackage}.dao.${moduleClass}Dao;
+import ${basePackage}.domain.dto.add.${moduleClass}AddDTO;
+import ${basePackage}.domain.dto.update.${moduleClass}UpdateDTO;
+import ${basePackage}.domain.dto.query.${moduleClass}QueryDTO;
+import ${basePackage}.domain.entity.${moduleClass}Entity;
+import ${basePackage}.domain.vo.${moduleClass}VO;
+import ${basePackage}.domain.vo.excel.${moduleClass}ExcelVO;
 import ${basePackage}.util.SmartPageUtil;
 import ${basePackage}.util.SmartBeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +72,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      * @date ${date}
      */
     @Transactional(rollbackFor = Exception.class)
-    public ResponseDTO<String> update(${moduleClass}UpdateDTO updateDTO) {
+    public ResponseDTO<String> modify(${moduleClass}UpdateDTO updateDTO) {
         ${moduleClass}Entity entity = SmartBeanUtil.copy(updateDTO, ${moduleClass}Entity.class);
         ${moduleVar}Dao.updateById(entity);
         return ResponseDTO.succ();

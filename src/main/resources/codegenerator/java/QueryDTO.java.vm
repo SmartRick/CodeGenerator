@@ -1,4 +1,4 @@
-package ${basePackage}.module.${modulePackage}.domain.dto;
+package ${basePackage}.domain.dto.query;
 
 import ${basePackage}.common.domain.PageParamDTO;
 import io.swagger.annotations.ApiModelProperty;
