@@ -4,18 +4,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${basePackage}.common.domain.PageResultDTO;
 import ${basePackage}.common.domain.ResponseDTO;
-import ${basePackage}.dao.${moduleClass}Dao;
+import ${basePackage}.mapper.${moduleClass}Mapper;
 import ${basePackage}.domain.dto.add.${moduleClass}AddDTO;
 import ${basePackage}.domain.dto.update.${moduleClass}UpdateDTO;
 import ${basePackage}.domain.dto.query.${moduleClass}QueryDTO;
 import ${basePackage}.domain.entity.${moduleClass}Entity;
 import ${basePackage}.domain.vo.${moduleClass}VO;
 import ${basePackage}.domain.vo.excel.${moduleClass}ExcelVO;
-import ${basePackage}.util.SmartPageUtil;
-import ${basePackage}.util.SmartBeanUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -33,55 +29,49 @@ public interface ${moduleClass}Service {
 
     /**
      * 根据id查询
+     * @author ${author}
      */
     public ${moduleClass}Entity queryById(Long id);
 
     /**
      * 分页查询
      * @author ${author}
-     * @date ${date}
      */
     public ResponseDTO<PageResultDTO<${moduleClass}VO>> queryByPage(${moduleClass}QueryDTO queryDTO);
 
     /**
      * 添加
      * @author ${author}
-     * @date ${date}
      */
     public ResponseDTO<String> add(${moduleClass}AddDTO addDTO);
 
     /**
      * 编辑
      * @author ${author}
-     * @date ${date}
      */
     public ResponseDTO<String> modify(${moduleClass}UpdateDTO updateDTO);
 
     /**
      * 删除
      * @author ${author}
-     * @date ${date}
     */
     public ResponseDTO<String> remove(Long id);
 
     /**
      * 批量删除
      * @author ${author}
-     * @date ${date}
      */
     public ResponseDTO<String> removeByIds(List<Long> idList);
 
     /**
      * 查询全部导出对象
      * @author ${author}
-     * @date ${date}
      */
     public List<${moduleClass}ExcelVO> queryAllExportData(${moduleClass}QueryDTO queryDTO);
 
     /**
      * 批量查询导出对象
      * @author ${author}
-     * @date ${date}
      */
     public List<${moduleClass}ExcelVO> queryBatchExportData(List<Long> idList);
 }

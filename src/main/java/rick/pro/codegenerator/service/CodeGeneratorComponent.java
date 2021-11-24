@@ -72,7 +72,7 @@ public class CodeGeneratorComponent {
         Map<String, String> templateMap = new HashMap<>();
         //后端
         templateMap.put(properties.getTemplatePath() + "/java/Controller.java.vm", javaPackagePath + "controller" + File.separator + moduleClass + "Controller.java");
-        templateMap.put(properties.getTemplatePath() + "/java/Dao.java.vm", javaPackagePath + "dao" + File.separator + moduleClass + "Dao.java");
+        templateMap.put(properties.getTemplatePath() + "/java/Dao.java.vm", javaPackagePath + "dao" + File.separator + moduleClass + "Mapper.java");
         templateMap.put(properties.getTemplatePath() + "/java/Dao.xml.vm", xmlPackagePath + moduleClass + "Mapper.xml");
         templateMap.put(properties.getTemplatePath() + "/java/AddDTO.java.vm", javaPackagePath + "domain" + File.separator + "dto" + File.separator + "add" + File.separator + moduleClass + "AddDTO.java");
         templateMap.put(properties.getTemplatePath() + "/java/UpdateDTO.java.vm", javaPackagePath + "domain" + File.separator + "dto" + File.separator + "update" + File.separator + moduleClass + "UpdateDTO.java");

@@ -63,7 +63,7 @@ public class CodeGeneratorService {
         this.basicValid(codeGenerator);
         String date = SmartDateUtil.formatYMDHMS(new Date());
         String tableDesc = this.getTableDesc(codeGenerator.getTableName());
-        System.out.println(codeGenerator.getTableName()+"的描述："+tableDesc);
+//        System.out.println(codeGenerator.getTableName() + "的描述：" + tableDesc);
         String author = codeGenerator.getAuthor();
         String basePackage = codeGenerator.getBasePackage();
         if (StringUtils.isEmpty(basePackage)) {
@@ -80,31 +80,31 @@ public class CodeGeneratorService {
         List<String> dtoImports = this.buildDTOImport(columnList);
         List<String> entityImports = this.buildEntityImport(columnList);
         Properties p = new Properties();
-        p.put("file.resource.loader.class" , "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader" );
-        p.put("directive.foreach.counter.name" , "velocityCount" );
-        p.put("directive.foreach.counter.initial.value" , "1" );
+        p.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        p.put("directive.foreach.counter.name", "velocityCount");
+        p.put("directive.foreach.counter.initial.value", "1");
         Velocity.init(p);
 
         Map<String, Object> map = new HashMap<>();
-        map.put("company" , codeGenerator.getCompany());
-        map.put("tableName" , codeGenerator.getTableName());
-        map.put("basePackage" , basePackage);
-        map.put("modulePackage" , modulePackage);
-        map.put("moduleClass" , moduleClass);
-        map.put("tableDesc" , tableDesc);
-        map.put("author" , author);
-        map.put("date" , date);
-        map.put("moduleVar" , moduleVar);
-        map.put("columnList" , columnList);
-        map.put("queryFieldList" , queryFieldList);
-        map.put("queryImports" , queryImports);
-        map.put("dtoImports" , dtoImports);
-        map.put("entityImports" , entityImports);
-        map.put("webModuleName" , CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, moduleClass).replaceAll("_" , "-" ));
-        map.put("upperCamel" , CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, moduleClass));
+        map.put("company", properties.getCompany());
+        map.put("tableName", codeGenerator.getTableName());
+        map.put("basePackage", basePackage);
+        map.put("modulePackage", modulePackage);
+        map.put("moduleClass", moduleClass);
+        map.put("tableDesc", tableDesc);
+        map.put("author", author);
+        map.put("date", date);
+        map.put("moduleVar", moduleVar);
+        map.put("columnList", columnList);
+        map.put("queryFieldList", queryFieldList);
+        map.put("queryImports", queryImports);
+        map.put("dtoImports", dtoImports);
+        map.put("entityImports", entityImports);
+        map.put("webModuleName", CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, moduleClass).replaceAll("_", "-"));
+        map.put("upperCamel", CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, moduleClass));
         //前端的变量
-        map.put("ViewUIMessage" , "$Message" );
-        map.put("VueRefs" , "$refs" );
+        map.put("ViewUIMessage", "$Message");
+        map.put("VueRefs", "$refs");
         VelocityContext context = new VelocityContext(map);
         this.codeGenerator(context, codeTemplates);
     }
@@ -115,7 +115,7 @@ public class CodeGeneratorService {
             queryFieldList.forEach(e -> {
                 importPackage(queryImports, e.getFieldType());
                 if ("in".equals(e.getSqlOperate())) {
-                    queryImports.add("import java.util.List;" );
+                    queryImports.add("import java.util.List;");
                 }
             });
         }
@@ -136,7 +136,7 @@ public class CodeGeneratorService {
         List<String> entityImports = Lists.newArrayList();
         if (CollectionUtils.isNotEmpty(columnList)) {
             columnList.forEach(e -> {
-                if (!e.getFieldName().equals("createTime" ) && !e.getFieldName().equals("updateTime" ) && !e.getFieldName().equals("id" )) {
+                if (!e.getFieldName().equals("createdAt") && !e.getFieldName().equals("updatedAt") && !e.getFieldName().equals("id")) {
                     importPackage(entityImports, e.getFieldType());
                 }
             });
@@ -145,11 +145,11 @@ public class CodeGeneratorService {
     }
 
     private void importPackage(List<String> imports, String fieldType) {
-        if ("Date".equals(fieldType) && !imports.contains("import java.util.Date;" )) {
-            imports.add("import java.util.Date;" );
+        if ("Date".equals(fieldType) && !imports.contains("import java.util.Date;")) {
+            imports.add("import java.util.Date;");
         }
-        if ("BigDecimal".equals(fieldType) && !imports.contains("import java.math.BigDecimal;" )) {
-            imports.add("import java.math.BigDecimal;" );
+        if ("BigDecimal".equals(fieldType) && !imports.contains("import java.math.BigDecimal;")) {
+            imports.add("import java.math.BigDecimal;");
         }
     }
 
@@ -167,14 +167,14 @@ public class CodeGeneratorService {
     private void codeGenerator(VelocityContext context, Map<String, String> codeTemplates) throws Exception {
         String projectPath = getOutputDir();
 
-        Velocity.setProperty("input.encoding" , "UTF-8" );
-        Velocity.setProperty("output.encoding" , "UTF-8" );
+        Velocity.setProperty("input.encoding", "UTF-8");
+        Velocity.setProperty("output.encoding", "UTF-8");
 
         for (Entry<String, String> entry : codeTemplates.entrySet()) {
             String template = entry.getKey();
             String filePath = projectPath + entry.getValue();
             String fileName = filePath.substring(filePath.lastIndexOf(File.separator) + 1);
-            String fileDir = filePath.replace(fileName, "" );
+            String fileDir = filePath.replace(fileName, "");
             File directory = new File(fileDir);
             if (!directory.exists()) {
                 directory.mkdirs();
@@ -182,18 +182,18 @@ public class CodeGeneratorService {
             FileWriter writer;
             try {
                 writer = new FileWriter(filePath);
-                Template tpl = Velocity.getTemplate(template, "UTF-8" );
+                Template tpl = Velocity.getTemplate(template, "UTF-8");
                 tpl.merge(context, writer);
                 writer.flush();
                 writer.close();
             } catch (Exception e) {
-                log.error("" , e);
+                log.error("", e);
             }
         }
 
-        log.info("------------------------------ 代 码 生 成 完 毕 ！ ------------------------------" );
-        log.info("代码目录：{}" , projectPath);
-        log.info("------------------------------ 代 码 生 成 完 毕 ！ ------------------------------" );
+        log.info("------------------------------ 代 码 生 成 完 毕 ！ ------------------------------");
+        log.info("代码目录：{}", projectPath);
+        log.info("------------------------------ 代 码 生 成 完 毕 ！ ------------------------------");
 
     }
 
@@ -201,19 +201,19 @@ public class CodeGeneratorService {
         try {
             int i = 1 / 0;
         } catch (Exception e) {
-            log.error("" , e);
+            log.error("", e);
         }
     }
 
     private void basicValid(CodeGeneratorDTO codeGenerator) throws Exception {
         if (StringUtils.isEmpty(codeGenerator.getTableName())) {
-            throw new Exception("你没建表吗?" );
+            throw new Exception("你没建表吗?");
         }
         if (StringUtils.isEmpty(codeGenerator.getTablePrefix())) {
-            throw new Exception("你的表没前缀吗?" );
+            throw new Exception("你的表没前缀吗?");
         }
         if (StringUtils.isEmpty(codeGenerator.getAuthor())) {
-            throw new Exception("输入下你的大名" );
+            throw new Exception("输入下你的大名");
         }
     }
 
@@ -262,8 +262,8 @@ public class CodeGeneratorService {
                 log.error(errorMsg);
                 throw new Exception(errorMsg);
             }
-            if ("Integer".equals(javaType) && column.getColumnName().contains("id" )) {
-                column.setFieldType("Long" );
+            if ("Integer".equals(javaType) && column.getColumnName().contains("id")) {
+                column.setFieldType("Long");
             } else {
                 column.setFieldType(javaType);
             }
@@ -294,7 +294,7 @@ public class CodeGeneratorService {
      * @return
      */
     private String columnName2Field(String columnName) {
-        String transName = WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_" , "" );
+        String transName = WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
         return WordUtils.uncapitalize(transName);
     }
 
@@ -307,9 +307,9 @@ public class CodeGeneratorService {
      */
     private String tableName2Class(String tableName, String tablePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
-            tableName = tableName.replaceFirst(tablePrefix, "" );
+            tableName = tableName.replaceFirst(tablePrefix, "");
         }
-        return WordUtils.capitalizeFully(tableName, new char[]{'_'}).replace("_" , "" );
+        return WordUtils.capitalizeFully(tableName, new char[]{'_'}).replace("_", "");
     }
 
     /**
@@ -321,9 +321,9 @@ public class CodeGeneratorService {
      */
     private String tableName2Package(String tableName, String tablePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
-            tableName = tableName.replaceFirst(tablePrefix, "" );
+            tableName = tableName.replaceFirst(tablePrefix, "");
         }
-        return tableName.replace("_" , "" );
+        return tableName.replace("_", "");
     }
 
     /**
@@ -335,9 +335,9 @@ public class CodeGeneratorService {
      */
     private String tableName2Var(String tableName, String tablePrefix) {
         if (StringUtils.isNotBlank(tablePrefix)) {
-            tableName = tableName.replaceFirst(tablePrefix, "" );
+            tableName = tableName.replaceFirst(tablePrefix, "");
         }
-        String transName = WordUtils.capitalizeFully(tableName, new char[]{'_'}).replace("_" , "" );
+        String transName = WordUtils.capitalizeFully(tableName, new char[]{'_'}).replace("_", "");
         return WordUtils.uncapitalize(transName);
     }
 

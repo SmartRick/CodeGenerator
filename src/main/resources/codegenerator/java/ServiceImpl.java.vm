@@ -4,18 +4,19 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${basePackage}.common.domain.PageResultDTO;
 import ${basePackage}.common.domain.ResponseDTO;
-import ${basePackage}.dao.${moduleClass}Dao;
+import ${basePackage}.mapper.${moduleClass}Mapper;
 import ${basePackage}.domain.dto.add.${moduleClass}AddDTO;
 import ${basePackage}.domain.dto.update.${moduleClass}UpdateDTO;
 import ${basePackage}.domain.dto.query.${moduleClass}QueryDTO;
 import ${basePackage}.domain.entity.${moduleClass}Entity;
 import ${basePackage}.domain.vo.${moduleClass}VO;
 import ${basePackage}.domain.vo.excel.${moduleClass}ExcelVO;
-import ${basePackage}.util.SmartPageUtil;
-import ${basePackage}.util.SmartBeanUtil;
+import ${basePackage}.utils.SmartPageUtil;
+import ${basePackage}.utils.SmartBeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
@@ -34,23 +35,22 @@ import java.util.List;
 public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
 
     @Autowired
-    private ${moduleClass}Dao ${moduleVar}Dao;
+    private ${moduleClass}Mapper ${moduleVar}Mapper;
 
     /**
      * 根据id查询
      */
     public ${moduleClass}Entity queryById(Long id){
-        return  ${moduleVar}Dao.selectById(id);
+        return  ${moduleVar}Mapper.selectById(id);
     }
 
     /**
      * 分页查询
      * @author ${author}
-     * @date ${date}
      */
     public ResponseDTO<PageResultDTO<${moduleClass}VO>> queryByPage(${moduleClass}QueryDTO queryDTO) {
         Page page = SmartPageUtil.convert2QueryPage(queryDTO);
-        IPage<${moduleClass}VO> voList = ${moduleVar}Dao.selectByPage(page, queryDTO);
+        IPage<${moduleClass}VO> voList = ${moduleVar}Mapper.selectByPage(page, queryDTO);
         PageResultDTO<${moduleClass}VO> pageResultDTO = SmartPageUtil.convert2PageResult(voList);
         return ResponseDTO.succData(pageResultDTO);
     }
@@ -58,65 +58,59 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
     /**
      * 添加
      * @author ${author}
-     * @date ${date}
      */
     public ResponseDTO<String> add(${moduleClass}AddDTO addDTO) {
         ${moduleClass}Entity entity = SmartBeanUtil.copy(addDTO, ${moduleClass}Entity.class);
-        ${moduleVar}Dao.insert(entity);
+        ${moduleVar}Mapper.insert(entity);
         return ResponseDTO.succ();
     }
 
     /**
      * 编辑
      * @author ${author}
-     * @date ${date}
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> modify(${moduleClass}UpdateDTO updateDTO) {
         ${moduleClass}Entity entity = SmartBeanUtil.copy(updateDTO, ${moduleClass}Entity.class);
-        ${moduleVar}Dao.updateById(entity);
+        ${moduleVar}Mapper.updateById(entity);
         return ResponseDTO.succ();
     }
 
     /**
      * 删除
      * @author ${author}
-     * @date ${date}
     */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> remove(Long id) {
-        ${moduleVar}Dao.deleteById(id)
+        ${moduleVar}Mapper.deleteById(id)
         return ResponseDTO.succ();
     }
 
     /**
      * 批量删除
      * @author ${author}
-     * @date ${date}
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> removeByIds(List<Long> idList) {
         QueryWrapper<SysAuthority> qw = new QueryWrapper<>();
         qw.in("id", ids);
-        ${moduleVar}Dao.delete(qw)
+        ${moduleVar}Mapper.delete(qw)
         return ResponseDTO.succ();
     }
 
     /**
      * 查询全部导出对象
      * @author ${author}
-     * @date ${date}
      */
     public List<${moduleClass}ExcelVO> queryAllExportData(${moduleClass}QueryDTO queryDTO) {
-        return ${moduleVar}Dao.selectAllExportData(queryDTO);
+        return ${moduleVar}Mapper.selectAllExportData(queryDTO);
     }
 
     /**
      * 批量查询导出对象
      * @author ${author}
-     * @date ${date}
      */
     public List<${moduleClass}ExcelVO> queryBatchExportData(List<Long> idList) {
-        return ${moduleVar}Dao.selectBatchExportData(idList);
+        return ${moduleVar}Mapper.selectBatchExportData(idList);
     }
 }

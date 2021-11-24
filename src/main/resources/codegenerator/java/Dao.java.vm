@@ -1,4 +1,4 @@
-package ${basePackage}.dao;
+package ${basePackage}.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -25,18 +25,18 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface ${moduleClass}Dao extends BaseMapper<${moduleClass}Entity> {
+public interface ${moduleClass}Mapper extends BaseMapper<${moduleClass}Entity> {
 
     /**
      * 分页查询
-     * @param selectDTO
+     * @param queryDTO
      * @return ${moduleClass}VO
     */
     IPage<${moduleClass}VO> selectByPage(Page page, @Param("queryDTO") ${moduleClass}QueryDTO queryDTO);
 
     /**
      * 查询所有导出数据
-     * @param selectDTO
+     * @param queryDTO
      * @return
      */
     List<${moduleClass}ExcelVO> selectAllExportData(@Param("queryDTO")${moduleClass}QueryDTO queryDTO);

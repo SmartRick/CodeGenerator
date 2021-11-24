@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Data
 public class ${moduleClass}AddDTO {
 #foreach ($column in $columnList)
-#if($column.fieldName != 'id')
+#if($column.fieldName != 'id' && $column.fieldName != 'createdAt' && $column.fieldName != 'updatedAt' && $column.fieldName != 'deletedAt')
 #if($column.fieldType == 'Date')
     @ApiModelProperty("${column.columnDesc}")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")

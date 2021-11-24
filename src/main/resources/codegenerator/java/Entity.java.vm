@@ -20,6 +20,7 @@ import lombok.Data;
 @Data
 @TableName("${tableName}")
 public class ${moduleClass}Entity extends BaseEntity implements Serializable{
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
@@ -29,9 +30,9 @@ public class ${moduleClass}Entity extends BaseEntity implements Serializable{
     /**
      * $column.columnDesc
      */
-    #if($column.columnName == 'deletedAt')
+#if($column.fieldName == 'deletedAt')
     @TableLogic(value = "0",delval = "1")
-    #end
+#end
     @ApiModelProperty("$column.columnDesc")
     private $column.fieldType $column.fieldName;
 
