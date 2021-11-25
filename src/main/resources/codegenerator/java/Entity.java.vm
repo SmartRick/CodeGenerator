@@ -1,10 +1,13 @@
 package ${basePackage}.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import ${basePackage}.common.domain.BaseEntity;
 #foreach ($entityImport in $entityImports)
 $entityImport
 #end
+import java.io.Serializable;
 import lombok.Data;
 
 /**

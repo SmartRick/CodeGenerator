@@ -31,7 +31,7 @@ public interface ${moduleClass}Service {
      * 根据id查询
      * @author ${author}
      */
-    public ${moduleClass}Entity queryById(Long id);
+    public ${moduleClass}VO queryById(Long id);
 
     /**
      * 分页查询

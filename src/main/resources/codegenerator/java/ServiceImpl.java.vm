@@ -1,5 +1,6 @@
 package ${basePackage}.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${basePackage}.common.domain.PageResultDTO;
@@ -11,6 +12,7 @@ import ${basePackage}.domain.dto.query.${moduleClass}QueryDTO;
 import ${basePackage}.domain.entity.${moduleClass}Entity;
 import ${basePackage}.domain.vo.${moduleClass}VO;
 import ${basePackage}.domain.vo.excel.${moduleClass}ExcelVO;
+import ${basePackage}.service.${moduleClass}Service;
 import ${basePackage}.utils.SmartPageUtil;
 import ${basePackage}.utils.SmartBeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +42,8 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
     /**
      * 根据id查询
      */
-    public ${moduleClass}Entity queryById(Long id){
-        return  ${moduleVar}Mapper.selectById(id);
+    public ${moduleClass}VO queryById(Long id){
+        return  SmartBeanUtil.copy(${moduleVar}Mapper.selectById(id), ${moduleClass}VO.class);
     }
 
     /**
@@ -82,7 +84,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
     */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> remove(Long id) {
-        ${moduleVar}Mapper.deleteById(id)
+        ${moduleVar}Mapper.deleteById(id);
         return ResponseDTO.succ();
     }
 
@@ -92,9 +94,9 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> removeByIds(List<Long> idList) {
-        QueryWrapper<SysAuthority> qw = new QueryWrapper<>();
-        qw.in("id", ids);
-        ${moduleVar}Mapper.delete(qw)
+        QueryWrapper<${moduleClass}Entity> qw = new QueryWrapper<>();
+        qw.in("id", idList);
+        ${moduleVar}Mapper.delete(qw);
         return ResponseDTO.succ();
     }
 

@@ -41,8 +41,8 @@ public class ${moduleClass}Controller extends BaseController {
 
     @ApiOperation(value = "根据Id查询${tableDesc}",notes = "@author ${author}")
     @GetMapping("/{id}")
-    public ResponseDTO<PageResultDTO<${moduleClass}VO>> queryById(@PathVariable @ApiParam(value = "${tableDesc}id", name = "id", required = true) Long id) {
-        return ${moduleVar}Service.queryById(id);
+    public ResponseDTO<${moduleClass}VO> queryById(@PathVariable @ApiParam(value = "${tableDesc}id", name = "id", required = true) Long id) {
+        return ResponseDTO.succData(${moduleVar}Service.queryById(id));
     }
 
     @ApiOperation(value = "分页查询${tableDesc}",notes = "@author ${author}")
