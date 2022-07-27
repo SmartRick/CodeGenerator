@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://8.142.34.31:3308/fun_culture?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.128.61:3306/shucangdh?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
     username: root
-    password: funadmin123
+    password: 123456
 mybatis-plus:
   mapper-locations: classpath:mappers/*.xml
 
@@ -12,6 +12,6 @@ codegenerator:
   table-prefix: t_
   author: SmartRick
   company: SmartRick
-  project-name: fun-culture
-  base-package: com.ram.funculture
+  project-name: shucangdh
+  base-package: cn.smartrick.metaverse
   project-path: D:\Temp

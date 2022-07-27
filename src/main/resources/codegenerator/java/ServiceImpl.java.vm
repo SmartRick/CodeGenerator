@@ -42,6 +42,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
     /**
      * 根据id查询
      */
+    @Override
     public ${moduleClass}VO queryById(Long id){
         return  SmartBeanUtil.copy(${moduleVar}Mapper.selectById(id), ${moduleClass}VO.class);
     }
@@ -50,6 +51,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      * 分页查询
      * @author ${author}
      */
+    @Override
     public ResponseDTO<PageResultDTO<${moduleClass}VO>> queryByPage(${moduleClass}QueryDTO queryDTO) {
         Page page = SmartPageUtil.convert2QueryPage(queryDTO);
         IPage<${moduleClass}VO> voList = ${moduleVar}Mapper.selectByPage(page, queryDTO);
@@ -61,6 +63,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      * 添加
      * @author ${author}
      */
+    @Override
     public ResponseDTO<String> add(${moduleClass}AddDTO addDTO) {
         ${moduleClass}Entity entity = SmartBeanUtil.copy(addDTO, ${moduleClass}Entity.class);
         ${moduleVar}Mapper.insert(entity);
@@ -71,6 +74,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      * 编辑
      * @author ${author}
      */
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> modify(${moduleClass}UpdateDTO updateDTO) {
         ${moduleClass}Entity entity = SmartBeanUtil.copy(updateDTO, ${moduleClass}Entity.class);
@@ -82,6 +86,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      * 删除
      * @author ${author}
     */
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> remove(Long id) {
         ${moduleVar}Mapper.deleteById(id);
@@ -92,6 +97,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      * 批量删除
      * @author ${author}
      */
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> removeByIds(List<Long> idList) {
         QueryWrapper<${moduleClass}Entity> qw = new QueryWrapper<>();
@@ -104,6 +110,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      * 查询全部导出对象
      * @author ${author}
      */
+    @Override
     public List<${moduleClass}ExcelVO> queryAllExportData(${moduleClass}QueryDTO queryDTO) {
         return ${moduleVar}Mapper.selectAllExportData(queryDTO);
     }
@@ -112,6 +119,7 @@ public class ${moduleClass}ServiceImpl implements ${moduleClass}Service{
      * 批量查询导出对象
      * @author ${author}
      */
+    @Override
     public List<${moduleClass}ExcelVO> queryBatchExportData(List<Long> idList) {
         return ${moduleVar}Mapper.selectBatchExportData(idList);
     }

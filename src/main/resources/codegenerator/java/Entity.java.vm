@@ -7,6 +7,7 @@ import ${basePackage}.common.domain.BaseEntity;
 #foreach ($entityImport in $entityImports)
 $entityImport
 #end
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import lombok.Data;
 
